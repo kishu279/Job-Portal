@@ -1,0 +1,17 @@
+{
+  "compilerOptions": {
+    "target": "es2016",
+    "module": "commonjs",
+    "esModuleInterop": true,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true, // Skipping the type-checking of library files
+    "strict": true, // Disable strict mode temporarily to check if this resolves the issue
+    "strictNullChecks": true,
+    "noImplicitAny": false,
+    "skipDefaultLibCheck": true, // Skip default library check for faster compilation
+    "outDir": "./dist", // Ensure output goes into a dist folder
+    "rootDir": "./src", // Keep your source in the src folder
+    "resolveJsonModule": true,
+    "allowSyntheticDefaultImports": true
+  }
+}
