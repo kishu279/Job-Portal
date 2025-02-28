@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Playwrite+IT+Moderna:wght@396&display=swap");
+
+.playwrite-font {
+  font-family: "Playwrite IT Moderna", cursive;
+  font-optical-sizing: auto;
+  font-weight: 100;
+  font-style: normal;
+}
+
+.bebas-neue-regular {
+  font-family: "Bebas Neue", sans-serif;
+  font-weight: 400;
+  font-style: italic;
+}
+
+/* .body {
+  cursor: none;
+} */
+
+.cursor {
+  position: fixed;
+  top: 0;
+  left: 0;
+  pointer-events: none;
+  border: 2px solid;
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  filter: invert(100%);
+  background: transparent;
+}

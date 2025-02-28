@@ -17,4 +17,14 @@ export const userCreateSchema = z.object({
   role: RoleEnum,
 });
 
-export type userCreateInput = z.infer<typeof userCreateSchema>; // this is the type that can be used over the project
+// export type userCreateInput = z.infer<typeof userCreateSchema>; // this is the type that can be used over the project
+
+export const userValidateSchema = z.object({
+  email: z.string().email("Invalid email"),
+  password: z
+    .string()
+    .min(6, "Password length must be atleast 6 characters")
+    .max(20, "Password length must be atleast 20 characters"),
+});
+
+// export type EmailPasswordType = z.infer<typeof userValidateSchema>;
