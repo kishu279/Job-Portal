@@ -1,0 +1,1 @@
+{"root":["./prisma/seed.ts","./src/server.ts","./src/db/prisma.ts","./src/routes/userRoutes.ts","./src/validation/userValidator.ts"],"errors":true,"version":"5.7.3"}

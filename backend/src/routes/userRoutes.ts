@@ -15,6 +15,7 @@ router.post("/signup", async (req: Request, res: Response): Promise<any> => {
   const validate = userCreateSchema.safeParse(req.body);
 
   // is the success code fails to do so then it will throw error
+  console.log(validate);
   if (!validate.success) {
     return res.status(400).json({
       success: false,
@@ -55,6 +56,7 @@ router.post("/signup", async (req: Request, res: Response): Promise<any> => {
     res.status(200).json({
       success: true,
       message: "User created Successfully",
+      userId: user.userId,
     });
   } catch (err) {
     console.log(err);
@@ -137,7 +139,5 @@ router.post("/signin", async (req: Request, res: Response): Promise<any> => {
     });
   }
 });
-
-
 
 export default router;

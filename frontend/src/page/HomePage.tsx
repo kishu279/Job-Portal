@@ -1,41 +1,24 @@
-import { FC, useEffect, useRef, useState } from "react";
-import "./../App.css";
+import { FC } from "react";
 import { SigninButton, SignupButton } from "../components/Button";
+import "./../App.css";
+import { Outlet } from "react-router";
 
 const HomePage: FC = () => {
-  const cursorPointerRef: HTMLDivElement | undefined = useRef(null);
-
-  useEffect(() => {
-    // we can also use the queryselector
-    const cursor: HTMLDivElement | undefined = cursorPointerRef.current;
-
-    function moveMouse(e: MouseEvent) {
-      const mouseX = e.clientX;
-      const mouseY = e.clientY;
-
-      cursor.style.transform = `translate3d(${mouseX}px, ${mouseY}px, 0)`;
-    }
-
-    window.addEventListener("mousemove", moveMouse);
-
-    return () => {
-      window.removeEventListener("movemouse", moveMouse);
-    };
-  }, []);
-
   return (
-    <div>
-      <div className="border h-[2000px] bg-gradient-to-r from-black from-0% to-white to-160% relative ">
-        <div className="h-[50px] flex items-center justify-end gap-4 mt-2 mr-5 sticky top-3 ">
+    <>
+      <div className="border h-[2000px] bg-gradient-to-r from-black from-0% via-60% to-150% to-white">
+        <div className="flex justify-end gap-4 mr-4 sticky top-5">
           <SignupButton />
           <SigninButton />
         </div>
-        <h1 className="bebas-neue-regular text-[250px] mt-10 ml-30 text-white cursor-grab select-none ">
-          JOB-BAZZAR
-        </h1>
+        <div className="absolute">
+          <h1 className=" bebas-neue-regular text-[250px] text-gray-300 mt-20 ml-40">
+            JOB-BAZZAR
+          </h1>
+        </div>
+        <Outlet />
       </div>
-      <div ref={cursorPointerRef} className="cursor "></div>
-    </div>
+    </>
   );
 };
 

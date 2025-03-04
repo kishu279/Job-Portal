@@ -9,7 +9,7 @@ export const userCreateSchema = z.object({
   password: z
     .string()
     .min(6, "Password length must be atleast 6 characters")
-    .max(20, "Password length must be atleast 20 characters"),
+    .max(20, "Password length must be upmost 20 characters"),
   validProof: z
     .string()
     .length(12, "Valid Proof must be exactly of lenght 12 characters"),
@@ -24,7 +24,7 @@ export const userValidateSchema = z.object({
   password: z
     .string()
     .min(6, "Password length must be atleast 6 characters")
-    .max(20, "Password length must be atleast 20 characters"),
+    .max(20, "Password length must be upmost 20 characters"),
 });
 
 // export type EmailPasswordType = z.infer<typeof userValidateSchema>;
