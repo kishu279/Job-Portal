@@ -7,6 +7,8 @@ import {
 import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
+import auth from "../middleware/Auth";
+import { number } from "zod";
 
 const router = express.Router();
 
@@ -137,5 +139,32 @@ router.post("/signin", async (req: Request, res: Response): Promise<any> => {
     });
   }
 });
+
+router.get(
+  "/profile",
+  auth,
+  async (req: Request, res: Response): Promise<any> => {
+    const userId = req._userId;
+
+    try {
+      const user = await prisma.user.findUnique({
+        where: { userId: Number(userId) as number },
+      });
+
+      console.log(user?.name);
+
+      res.status(200).json({
+        success: true,
+        message: "success account details",
+        id: userId,
+      });
+    } catch (err) {
+      return res.status(200).json({
+        success: true,
+        message: err,
+      });
+    }
+  }
+);
 
 export default router;

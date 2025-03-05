@@ -40,6 +40,8 @@ model Profile {
   experience    Int 
   lastCompany   String[]
   interest      String[]
+  bio           String
+  achievements  String[]
   updatedAt     DateTime    @updatedAt
 
   userId        Int?        @unique
@@ -55,6 +57,7 @@ model Jobs {
   location      String?
   workingHours  Int?
   postedAt      DateTime    @default(now())
+  description   String
 
   hrId          Int?         
   user          User?       @relation(fields: [hrId], references: [userId], name: "HRJobs", onDelete: Cascade)

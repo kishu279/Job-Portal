@@ -38,6 +38,7 @@ const LogOutButton: FC = () => {
   return (
     <>
       <button
+        className="border p-2 rounded-2xl"
         onClick={() => {
           localStorage.removeItem("auth-key");
           ngn("/");

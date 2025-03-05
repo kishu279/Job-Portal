@@ -9,8 +9,12 @@ const LandingPage: FC = () => {
       <div className="">
         <div className="h-20 shadow-lg dispay place-items-center flex justify-around">
           <Logo />
-          <span className="border">
-            <input type="text" placeholder="search..." />
+          <span>
+            <input
+              type="text"
+              placeholder="search..."
+              className="border p-2 rounded-2xl w-[300px]"
+            />
           </span>
           <LogOutButton />
         </div>
