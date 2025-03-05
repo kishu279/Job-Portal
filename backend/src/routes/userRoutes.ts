@@ -125,8 +125,6 @@ router.post("/signin", async (req: Request, res: Response): Promise<any> => {
       }
     );
 
-    console.log(token, " ", secret_key);
-
     res.status(200).json({
       success: true,
       message: "user validated",

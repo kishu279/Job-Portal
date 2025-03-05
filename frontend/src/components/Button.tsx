@@ -1,5 +1,5 @@
 import { FC } from "react";
-import { Navigation, NavigationType, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 
 const SignupButton: FC = () => {
   const ngn = useNavigate();
@@ -33,4 +33,19 @@ const SigninButton: FC = () => {
   );
 };
 
-export { SignupButton, SigninButton };
+const LogOutButton: FC = () => {
+  const ngn = useNavigate();
+  return (
+    <>
+      <button
+        onClick={() => {
+          localStorage.removeItem("auth-key");
+          ngn("/");
+        }}
+      >
+        Logout
+      </button>
+    </>
+  );
+};
+export { SignupButton, SigninButton, LogOutButton };

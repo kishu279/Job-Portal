@@ -2,6 +2,7 @@ import { FC, useState } from "react";
 import { UserCreateSchema, userValidateSchema } from "../schema/validator";
 import "./../App.css";
 import axios, { AxiosError } from "axios";
+import { useNavigate } from "react-router";
 
 const SignUpPage: FC = () => {
   const [name, setName] = useState("");
@@ -10,6 +11,7 @@ const SignUpPage: FC = () => {
   const [validProof, setvalidProof] = useState("");
   const [contactInfo, setContactInfo] = useState("");
   const [role, setRole] = useState("");
+  const [loading, setLoading] = useState(false);
 
   async function handleClick(): Promise<void> {
     const result = UserCreateSchema.safeParse({
@@ -33,6 +35,7 @@ const SignUpPage: FC = () => {
       );
     }
 
+    setLoading(true);
     try {
       //   console.log(result.data);
       const response = await axios.post(
@@ -51,6 +54,7 @@ const SignUpPage: FC = () => {
       console.log(err.response.data.message);
       alert(err.response.data.message);
     } finally {
+      setLoading(false);
     }
   }
 
@@ -58,7 +62,12 @@ const SignUpPage: FC = () => {
     <>
       <div className="h-[600px] w-[900px] left-[28%] top-[20%] border-[3px] bg-white display flex justify-center justify-items-center fixed rounded-3xl opacity-85">
         <div className="flex flex-col gap-10 items-center justify-center">
-          <div className="flex flex-col gap-3">
+          <div
+            className={
+              "flex flex-col gap-3" +
+              (loading === true ? "blur-sm cursor-none" : "")
+            }
+          >
             <input
               placeholder="name"
               type="text"
@@ -135,6 +144,7 @@ const SignUpPage: FC = () => {
           >
             Register
           </button>
+          <span>{loading && <p className="">Loading...</p>}</span>
         </div>
       </div>
     </>
@@ -144,6 +154,8 @@ const SignUpPage: FC = () => {
 const SignInPage: FC = () => {
   const [email, setEmail] = useState("");
   const [passwd, setPasswd] = useState("");
+  const [loading, setLoading] = useState(false);
+  const navigation = useNavigate();
 
   async function handleClick(): Promise<void> {
     const result = userValidateSchema.safeParse({
@@ -161,6 +173,7 @@ const SignInPage: FC = () => {
       );
     }
 
+    setLoading(true);
     try {
       const response = await axios.post(
         "http://localhost:3000/user/signin",
@@ -172,14 +185,18 @@ const SignInPage: FC = () => {
         }
       );
 
-      console.log(response);
       alert(response.data.message);
 
       // token is in the response
       localStorage.setItem("auth-token", response.data.token);
+      navigation("/job-board");
+
+      // After setting the token it will redirect to the page main page
     } catch (err: AxiosError) {
       alert(err.response.data.message);
       throw new Error(err.response.data.message);
+    } finally {
+      setLoading(false);
     }
   }
 
@@ -187,7 +204,12 @@ const SignInPage: FC = () => {
     <>
       <div className="h-[600px] w-[900px] left-[28%] top-[20%] border-[3px] bg-white flex display justify-center justify-items-center fixed rounded-2xl opacity-85">
         <div className="flex flex-col gap-10 items-center justify-center">
-          <div className="flex flex-col gap-3">
+          <div
+            className={
+              "flex flex-col gap-3 " +
+              (loading === true ? "blur-sm cursor-none" : "")
+            }
+          >
             <input
               type="email"
               className="button-auth"
@@ -215,6 +237,7 @@ const SignInPage: FC = () => {
           >
             Login
           </button>
+          <span>{loading && <p className="">Loading...</p>}</span>
         </div>
       </div>
     </>
