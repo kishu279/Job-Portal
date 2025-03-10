@@ -19,3 +19,72 @@
   padding-left: 10px;
   font-size: x-large;
 }
+
+.loader {
+  /* border: 2px solid black; */
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 999;
+}
+
+.spinner {
+  width: 50px;
+  height: 50px;
+  border: 5px solid #ccc;
+  border-top-color: #333;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.parent-blur {
+  filter: blur(2px);
+}
+
+.motivation-speech-color {
+  animation-name: speech-font;
+  animation-duration: 10s;
+  animation-iteration-count: infinite;
+  text-align: start;
+}
+
+@keyframes speech-font {
+  0% {
+    color: red;
+  }
+
+  10% {
+    color: white;
+  }
+
+  30% {
+    color: yellow;
+  }
+
+  40% {
+    color: green;
+  }
+
+  50% {
+    col0r: cyan;
+  }
+
+  90% {
+    color: orange;
+  }
+
+  100% {
+    color: red;
+  }
+}

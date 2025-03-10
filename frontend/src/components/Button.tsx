@@ -1,52 +1,24 @@
+import { SignInButton, SignUpButton } from "@clerk/clerk-react";
 import { FC } from "react";
-import { useNavigate } from "react-router";
 
-const SignupButton: FC = () => {
-  const ngn = useNavigate();
+const Signin: FC = () => {
   return (
-    <span className="text-white w-[70px] bebas-neue-regular -skew-x-15 border-2 p-1 ">
-      <p
-        className="skew-x-15 text-[20px] text-center cursor-pointer select-none"
-        onClick={() => {
-          ngn("/register");
-        }}
-      >
-        SIGNUP
-      </p>
+    <span className="border-2 p-1 w-[70px] bebas-neue-regular text-gray-300 -skew-x-12">
+      <div className="text-center text-[20px] skew-x-12">
+        <SignInButton />
+      </div>
     </span>
   );
 };
 
-const SigninButton: FC = () => {
-  const ngn = useNavigate();
+const Signup: FC = () => {
   return (
-    <span className="text-white w-[70px] bebas-neue-regular border-2 p-1 -skew-x-15">
-      <p
-        className="skew-x-15 text-[20px] text-center cursor-pointer select-none"
-        onClick={() => {
-          ngn("/login");
-        }}
-      >
-        SIGNIN
-      </p>
+    <span className="w-[70px] bebas-neue-regular bebas-neue-regular border-2 p-1 text-gray-300 -skew-x-12 ">
+      <div className="text-center text-[20px] skew-x-12 ">
+        <SignUpButton />
+      </div>
     </span>
   );
 };
 
-const LogOutButton: FC = () => {
-  const ngn = useNavigate();
-  return (
-    <>
-      <button
-        className="border p-2 rounded-2xl"
-        onClick={() => {
-          localStorage.removeItem("auth-key");
-          ngn("/");
-        }}
-      >
-        Logout
-      </button>
-    </>
-  );
-};
-export { SignupButton, SigninButton, LogOutButton };
+export { Signin, Signup };
