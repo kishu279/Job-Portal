@@ -35,6 +35,7 @@ const motivationSpeech = [
 const HomePage: FC = () => {
   const [currentSpeech, setCurrentSpeech] = useState(motivationSpeech[0]);
 
+  // On Authentication it will just store the token in the localstorage
   const userAuthState = useAuth();
   useEffect(() => {
     const fetchToken = async () => {

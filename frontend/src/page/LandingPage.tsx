@@ -4,31 +4,23 @@ import axios, { AxiosError } from "axios";
 import "../App.css";
 import {
   SignedIn,
+  SignedOut,
   SignOutButton,
   useAuth,
   UserButton,
   useSession,
   useUser,
 } from "@clerk/clerk-react";
-import { Signout } from "../components/Button";
+import { Signin, Signout, Signup } from "../components/Button";
 import { data } from "react-router";
+import UpperBoard from "../components/UpperBoard";
 
 const LandingPage: FC = () => {
   const [sideBar, setSideBar] = useState(true);
   const token = localStorage.getItem("auth-token");
   const [loading, setLoading] = useState(false);
 
-  const userAuthState = useAuth();
-
-  useEffect(() => {
-    const fetchToken = async () => {
-      const sessionToken = (await userAuthState.getToken()) as string;
-      localStorage.setItem("auth-token", sessionToken);
-    };
-
-    fetchToken();
-  }, [userAuthState]);
-
+  //  FETCHING DATA --> fron the backend to show the content
   async function handleProfile() {
     setLoading(true);
     try {
@@ -48,16 +40,16 @@ const LandingPage: FC = () => {
 
   useEffect(() => {
     if (!token) {
-      // throw new Error("Token not found");
+      throw new Error("Token not found");
     }
-
+    console.log("Token found successfully");
     // handleProfile();
   }, []);
 
   return (
     <>
       <div className={`${loading ? "blur-lg cursor-none" : ""}`}>
-        <div className="h-20 shadow-lg dispay place-items-center flex justify-around">
+        {/* <div className="h-20 shadow-lg dispay place-items-center flex justify-around">
           <Logo />
           <span>
             <input
@@ -66,13 +58,22 @@ const LandingPage: FC = () => {
               className="border p-2 rounded-2xl w-[300px]"
             />
           </span>
+
+          <SignedOut>
+            <Signup />
+            <Signin />
+          </SignedOut>
+
           <SignedIn>
             <div className=" flex w-[140px] justify-between mr-5 ">
               <UserButton />
               <Signout />
             </div>
           </SignedIn>
-        </div>
+        </div> */}
+
+        <UpperBoard page={"Job-Board"} />
+
         <div>
           <div
             className={`border border-gray-200 h-[847px] ${
