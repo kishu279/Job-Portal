@@ -88,3 +88,7 @@
     color: red;
   }
 }
+
+.classDashNext:hover {
+  color: gray
+}

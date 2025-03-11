@@ -2,12 +2,32 @@ import { FC, useEffect, useState } from "react";
 import { Logo } from "../components/Logo";
 import axios, { AxiosError } from "axios";
 import "../App.css";
-import { SignOutButton } from "@clerk/clerk-react";
+import {
+  SignedIn,
+  SignOutButton,
+  useAuth,
+  UserButton,
+  useSession,
+  useUser,
+} from "@clerk/clerk-react";
+import { Signout } from "../components/Button";
+import { data } from "react-router";
 
 const LandingPage: FC = () => {
   const [sideBar, setSideBar] = useState(true);
   const token = localStorage.getItem("auth-token");
-  const [loading, setLoading] = useState(true);
+  const [loading, setLoading] = useState(false);
+
+  const userAuthState = useAuth();
+
+  useEffect(() => {
+    const fetchToken = async () => {
+      const sessionToken = (await userAuthState.getToken()) as string;
+      localStorage.setItem("auth-token", sessionToken);
+    };
+
+    fetchToken();
+  }, [userAuthState]);
 
   async function handleProfile() {
     setLoading(true);
@@ -28,10 +48,10 @@ const LandingPage: FC = () => {
 
   useEffect(() => {
     if (!token) {
-      throw new Error("Token not found");
+      // throw new Error("Token not found");
     }
 
-    handleProfile();
+    // handleProfile();
   }, []);
 
   return (
@@ -46,7 +66,12 @@ const LandingPage: FC = () => {
               className="border p-2 rounded-2xl w-[300px]"
             />
           </span>
-          <SignOutButton />
+          <SignedIn>
+            <div className=" flex w-[140px] justify-between mr-5 ">
+              <UserButton />
+              <Signout />
+            </div>
+          </SignedIn>
         </div>
         <div>
           <div

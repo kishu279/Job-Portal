@@ -1,7 +1,10 @@
 import { FC, useEffect, useState } from "react";
 import {
+  DashBoardButton,
+  JobButton,
   Signin,
   SigninButton,
+  Signout,
   Signup,
   SignupButton,
 } from "../components/Button";
@@ -11,7 +14,9 @@ import {
   SignedIn,
   SignedOut,
   SignOutButton,
+  useAuth,
   UserButton,
+  useSession,
 } from "@clerk/clerk-react";
 
 const motivationSpeech = [
@@ -29,6 +34,16 @@ const motivationSpeech = [
 
 const HomePage: FC = () => {
   const [currentSpeech, setCurrentSpeech] = useState(motivationSpeech[0]);
+
+  const userAuthState = useAuth();
+  useEffect(() => {
+    const fetchToken = async () => {
+      const sessionToken = (await userAuthState.getToken()) as string;
+      localStorage.setItem("auth-token", sessionToken);
+    };
+
+    fetchToken();
+  }, [userAuthState]);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -54,8 +69,10 @@ const HomePage: FC = () => {
           </SignedOut>
 
           <SignedIn>
-            <UserButton />
-            <SignOutButton />
+            <div className=" flex w-[140px] justify-between mr-5 ">
+              <UserButton />
+              <Signout />
+            </div>
           </SignedIn>
         </div>
         <div className="absolute select-none">
@@ -66,6 +83,10 @@ const HomePage: FC = () => {
             <p className="text-gray-400 font-extralight font-mono text-[30px] ">
               {currentSpeech}
             </p>
+          </div>
+          <div className="ml-[100%] gap-2 disply flex flex-col">
+            <DashBoardButton />
+            <JobButton />
           </div>
         </div>
         <Outlet />
