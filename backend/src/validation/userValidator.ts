@@ -6,10 +6,11 @@ type RoleEnumType = z.infer<typeof RoleEnum>;
 export const userCreateSchema = z.object({
   name: z.string().min(1, "Name is required"),
   email: z.string().email("Invalid Email Format"),
-  password: z
-    .string()
-    .min(6, "Password length must be atleast 6 characters")
-    .max(20, "Password length must be upmost 20 characters"),
+  // password: z
+  //   .string()
+  //   .min(6, "Password length must be atleast 6 characters")
+  //   .max(20, "Password length must be upmost 20 characters"),
+  isValidated: z.boolean(),
   validProof: z
     .string()
     .length(12, "Valid Proof must be exactly of lenght 12 characters"),
@@ -21,10 +22,11 @@ export const userCreateSchema = z.object({
 
 export const userValidateSchema = z.object({
   email: z.string().email("Invalid email"),
-  password: z
-    .string()
-    .min(6, "Password length must be atleast 6 characters")
-    .max(20, "Password length must be upmost 20 characters"),
+  // password: z
+  //   .string()
+  //   .min(6, "Password length must be atleast 6 characters")
+  //   .max(20, "Password length must be upmost 20 characters"),
+  isValidated: z.boolean(),
 });
 
 // export type EmailPasswordType = z.infer<typeof userValidateSchema>;

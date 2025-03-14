@@ -90,5 +90,20 @@
 }
 
 .classDashNext:hover {
-  color: gray
+  color: gray;
+}
+
+.dashboard-section {
+  height: 5vh;
+  width: 297px;
+  box-shadow: 1px 2px 5px 0px;
+}
+
+.dashboard-allElements > input,
+label, div{
+  font-size: 14px;
+}
+
+.dashboard-allElements input {
+  background-color: rgb(247, 247, 247);
 }

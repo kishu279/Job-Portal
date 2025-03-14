@@ -1,18 +1,9 @@
-// import { UserButton } from "@clerk/clerk-react";
-
-import {
-  SignedIn,
-  SignedOut,
-  useAuth,
-  UserButton,
-  useSignIn,
-} from "@clerk/clerk-react";
-import { Logo } from "../components/Logo";
-import { Signin, Signout, Signup } from "../components/Button";
-import { Navigation, useNavigate } from "react-router";
+import { useAuth } from "@clerk/clerk-react";
 import UpperBoard from "../components/UpperBoard";
 import { useState } from "react";
+import "./../App.css";
 
+// import { UserButton } from "@clerk/clerk-react";
 // const DotIcon = () => {
 //   return (
 //     <svg
@@ -97,14 +88,17 @@ export default function DashBoard() {
               {sideBar ? "left_panel_close" : "left_panel_open"}
             </button>
           </div>
+          {sideBar && (
+            <div className="fixed translate-y-[130px] display flex flex-col gap-2">
+              <button className="dashboard-section">user</button>
+              <button className="dashboard-section">profile</button>
+              <button className="dashboard-section">jobs</button>
+            </div>
+          )}
         </div>
-        {sideBar && (
-          <div className="fixed left-[120px] translate-y-[130px] display flex flex-col gap-4">
-            <p>User</p>
-            <p>Profile</p>
-            <p>Jobs</p>
-          </div>
-        )}
+        <div>
+          <div>Hii this side i want to set </div>
+        </div>
       </div>
     </>
   );

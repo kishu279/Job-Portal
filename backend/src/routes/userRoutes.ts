@@ -8,7 +8,6 @@ import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import "dotenv/config";
 import auth from "../middleware/Auth";
-import { number } from "zod";
 
 const router = express.Router();
 
@@ -41,14 +40,22 @@ router.post("/signup", async (req: Request, res: Response): Promise<any> => {
     }
 
     // Store the hashed password
-    const hashedPassword = await bcrypt.hash(data.password, 10);
+    // const hashedPassword = await bcrypt.hash(data.password, 10);
+    // we will only check that is validated
+
+    if (!data.isValidated) {
+      return res.status(400).json({
+        success: false,
+        message: "User is not validated",
+      });
+    }
 
     // create the user is not present
     const user = await prisma.user.create({
       data: {
         name: data.name,
         email: data.email,
-        password: hashedPassword,
+        // password: hashedPassword,
         validProof: data.validProof,
         contactInfo: data.contactInfo,
         role: data.role,
@@ -95,9 +102,9 @@ router.post("/signin", async (req: Request, res: Response): Promise<any> => {
     }
 
     // compare the password
-    const isMatch = await bcrypt.compare(data.password, user.password);
+    // const isMatch = await bcrypt.compare(data.password, user.password);
 
-    if (!isMatch) {
+    if (!data.isValidated) {
       return res.status(400).json({
         success: false,
         message: "User Authentication failed",

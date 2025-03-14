@@ -39,9 +39,9 @@ const DashBoardButton: FC = () => {
   const navigation = useNavigate();
 
   return (
-    <div className="border-2 text-white w-[190px] h-[70px] text-2xl p-1 bebas-neue-regular skew-x-12 classDashNext text-center">
+    <div className="border-2 text-white w-[190px] h-[70px] text-2xl bebas-neue-regular skew-x-12 classDashNext text-center">
       <button
-        className="text-center text-[40px] -skew-x-12 "
+        className="text-center text-[40px] -skew-x-12 w-[190px] h-[70px]  p-2"
         onClick={() => {
           navigation("/dashboard");
         }}
@@ -55,12 +55,12 @@ const DashBoardButton: FC = () => {
 const JobButton: FC = () => {
   const navigation = useNavigate();
   return (
-    <div className="border-2 w-[190px] h-[70px] text-white text-2xl p-2 bebas-neue-regular -skew-x-12 classDashNext text-center">
+    <div className="border-2 w-[190px] h-[70px] text-white text-2xl bebas-neue-regular -skew-x-12 classDashNext text-center">
       <button
         onClick={() => {
           navigation("/job-board");
         }}
-        className="text-[40px] skew-x-12"
+        className="text-[40px] skew-x-12 w-[190px] h-[70px] p-2"
       >
         Next
       </button>
